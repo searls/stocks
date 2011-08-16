@@ -6,3 +6,10 @@ window.stocks = {
     });
   }
 };
+
+$(function() {
+  $('input[name="stockSymbol"]').live('change',function(e) {
+    e.preventDefault();
+    stocks.populatePredictedValue($(this).val());
+  });
+});
