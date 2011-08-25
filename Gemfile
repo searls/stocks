@@ -11,7 +11,7 @@ group :test, :development do
     gem 'rb-fsevent', :require => false
   end
 
-  gem 'guard-rails-assets'
+  gem 'guard-bundler'
   gem 'guard-jasmine-headless-webkit'
   gem 'jasmine'
   gem 'jasmine-headless-webkit'
