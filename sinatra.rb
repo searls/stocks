@@ -13,6 +13,5 @@ end
 def grab url
   response = HTTParty.get(url)
   
-  
   response.body
 end
