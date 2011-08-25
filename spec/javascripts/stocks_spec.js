@@ -1,27 +1,6 @@
 // console.log("spec is running");
 
-// var build_url_for = function(stockSymbol) {
-//   var host = "www.trefis.com";
-//   var path = "/servlet/HtmlService/getSuperDivisionSankeys";
-//   var params = "symbol=" + stockSymbol;
-//   var url = "http://" + host + path + "?" + params;
 //
-//   return url;
-// };
-//
-// var get_quote_for = function(stockSymbol) {
-//   var url = build_url_for(stockSymbol);
-//   console.log(url);
-//   return {"price":"600","value":"300"};
-// };
-//
-// describe("#build_url_for", function() {
-//   it("returns a url for an api endpoint", function () {
-//     var result = build_url_for("AAPL");
-//     var actual = "http://www.trefis.com/servlet/HtmlService/getSuperDivisionSankeys?symbol=AAPL";
-//     expect(result).toEqual(actual);
-//   });
-// });
 //
 // describe("stocks", function() {
 //   it("calls a web service for a quote", function () {
@@ -30,8 +9,44 @@
 //   });
 // });
 
+var buildUrlFor = function(stockSymbol) {
+  var host, path, params, url;
+
+  host = "www.trefis.com";
+  path = "/servlet/HtmlService/getSuperDivisionSankeys";
+  params = "symbol=" + stockSymbol;
+  url = "http://" + host + path + "?" + params;
+
+  return url;
+};
+
+var getQuoteFor = function(stockSymbol) {
+  var url = buildUrlFor(stockSymbol);
+  response = $.getJSON(url, function(data) {
+  });
+  console.log(response);
+
+  return response;
+};
+
 describe("stocks", function() {
   var $result;
+
+  describe("#buildUrlFor", function() {
+    it("returns a url for an api endpoint", function () {
+      var result = buildUrlFor("AAPL");
+      var actual = "http://www.trefis.com/servlet/HtmlService/getSuperDivisionSankeys?symbol=AAPL";
+        expect(result).toEqual(actual);
+    });
+  });
+
+  describe("#getQuoteFor", function() {
+    it("calls a web service for a quote", function () {
+      var result = getQuoteFor("AAPL");
+      expect(result).toEqual({"price":"600","value":"300"});
+    });
+  });
+
   describe("#populatePredictedValue", function() {
     beforeEach(function() {
       $result = $.jasmine.inject('<span class="predictedValue"></span>');
