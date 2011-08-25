@@ -2,6 +2,10 @@ require 'sinatra'
 require 'httparty'
 require 'nokogiri'
 
+get '/' do
+  return File.open("public/index.html")
+end
+
 get '/stock/:stock_symbol' do |stock_symbol|
   grab "http://www.trefis.com/servlet/HtmlService/getSuperDivisionSankeys?symbol=#{stock_symbol}&width=380"
 end
